@@ -23,7 +23,7 @@ variable "aws_region" {
   env = ["TF_VAR_region"]
 }
 
-project = "hc-virtual-lab-hat-hat"
+project = "hc-irl-lab-hat-hat-demo"
 
 app "dev" {
   build {
@@ -53,7 +53,7 @@ app "dev" {
 
 app "ecs" {
   runner {
-    profile = "ecs-LAB-ECS-RUNNER"
+    profile = "ecs-ECS-RUNNER-LAB"
   }
 
   build {
@@ -85,7 +85,7 @@ app "ecs" {
 
 app "kubernetes" {
   runner {
-    profile = "kubernetes-LAB-KUBE-RUNNER"
+    profile = "kubernetes-KUBE-RUNNER-LAB"
   }
 
   build {
