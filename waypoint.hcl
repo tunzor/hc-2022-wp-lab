@@ -23,7 +23,7 @@ variable "aws_region" {
   env = ["TF_VAR_region"]
 }
 
-project = "hc-lab-hat-hat-demo"
+project = "hc-virtual-lab-hat-hat"
 
 app "dev" {
   build {
@@ -83,50 +83,50 @@ app "ecs" {
   }
 }
 
-// app "kubernetes" {
-//   runner {
-//     profile = "kubernetes-KUBE-RUNNER"
-//   }
+app "kubernetes" {
+  runner {
+    profile = "kubernetes-KUBE-RUNNER"
+  }
 
-//   build {
-//     use "docker" {}
-//     registry {
-//       use "docker" {
-//         image = "${var.registry_username}/${var.registry_imagename}"
-//         tag = "testing"
-//         local = false
-//         auth {
-//           username = var.registry_username
-//           password = var.registry_password
-//         }
-//       }
-//     }
-//   }
+  build {
+    use "docker" {}
+    registry {
+      use "docker" {
+        image = "${var.registry_username}/${var.registry_imagename}"
+        tag = "testing"
+        local = false
+        auth {
+          username = var.registry_username
+          password = var.registry_password
+        }
+      }
+    }
+  }
 
-//   deploy {
-//     use "kubernetes" {
-//       probe_path = "/"
-//       service_port = 3000
-//       static_environment = {
-//         PLATFORM = "kubernetes (us-west)"
-//       }
-//       memory {
-//         request = "64Mi"
-//         limit   = "128Mi"
-//       }
+  deploy {
+    use "kubernetes" {
+      probe_path = "/"
+      service_port = 3000
+      static_environment = {
+        PLATFORM = "kubernetes (us-west)"
+      }
+      memory {
+        request = "64Mi"
+        limit   = "128Mi"
+      }
 
-//       autoscale {
-//         min_replicas = 1
-//         max_replicas = 5
-//         cpu_percent = 20
-//       }
-//     }
-//   }
+      autoscale {
+        min_replicas = 1
+        max_replicas = 5
+        cpu_percent = 20
+      }
+    }
+  }
 
-//   release {
-//     use "kubernetes" {
-//       load_balancer = true
-//       port          = 3000
-//     }
-//   }
-// }
+  release {
+    use "kubernetes" {
+      load_balancer = true
+      port          = 3000
+    }
+  }
+}
