@@ -85,7 +85,7 @@ app "ecs" {
 
 app "kubernetes" {
   runner {
-    profile = "kubernetes-KUBE-RUNNER"
+    profile = "kubernetes-LAB-KUBE-RUNNER"
   }
 
   build {
